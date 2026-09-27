@@ -1,4 +1,4 @@
-/** Amazon Associates (IT) — set VITE_AMAZON_ASSOCIATE_TAG in .env */
+/** Amazon Associates (IT) — set AMAZON_ASSOCIATE_TAG (o VITE_AMAZON_ASSOCIATE_TAG) */
 
 export const AMAZON_MARKETPLACE = 'www.amazon.it'
 
