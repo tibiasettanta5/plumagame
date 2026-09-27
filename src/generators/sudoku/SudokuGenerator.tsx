@@ -182,6 +182,7 @@ export function SudokuGenerator({ onBackHome }: Props) {
   }
 
   return (
+    <>
     <div className="sudoku-app">
       <aside className="wizard-panel">
         <header className="sudoku-brand">
@@ -391,14 +392,6 @@ export function SudokuGenerator({ onBackHome }: Props) {
         <AffiliateFooter />
       </aside>
 
-      <AffiliatePopup
-        open={affiliatePopupOpen}
-        phase={downloadPhase}
-        progress={downloadProgress}
-        game="sudoku"
-        onClose={() => setAffiliatePopupOpen(false)}
-      />
-
       <main className="sudoku-stage">
         <p className="preview-caption">{t('common.preview')}</p>
         <section className="preview-panel">
@@ -412,5 +405,14 @@ export function SudokuGenerator({ onBackHome }: Props) {
         </section>
       </main>
     </div>
+
+      <AffiliatePopup
+        open={affiliatePopupOpen}
+        phase={downloadPhase}
+        progress={downloadProgress}
+        game="sudoku"
+        onClose={() => setAffiliatePopupOpen(false)}
+      />
+    </>
   )
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useT } from '../../i18n'
 import {
   AFFILIATE_ENABLED,
@@ -118,7 +119,8 @@ export function AffiliatePopup({
 
   const showProducts = AFFILIATE_ENABLED && products.length > 0
 
-  return (
+  // Portal su body: evita che il grid del wizard (2 colonne) schiacci/nasconda i prodotti
+  return createPortal(
     <div
       className="aff-shell"
       role="presentation"
@@ -175,7 +177,8 @@ export function AffiliatePopup({
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   )
 }
 

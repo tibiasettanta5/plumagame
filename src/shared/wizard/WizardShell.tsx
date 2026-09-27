@@ -38,36 +38,49 @@ export function WizardShell({
   const t = useT()
   const progressLabel = `${stepIndex + 1} / ${stepTotal}`
   return (
-    <div className="wizard-app">
-      <aside className="wizard-panel">
-        <header className="wizard-brand">
-          {onBackHome && (
-            <button type="button" className="home-link" onClick={onBackHome}>
-              {t('common.backHome')}
-            </button>
-          )}
-          <BrandLogo />
-          <h1>{title}</h1>
-          {onStartGuide && (
-            <button type="button" className="guide-launch" onClick={onStartGuide}>
-              {t('common.howToPlay')}
-            </button>
-          )}
-        </header>
+    <>
+      <div className="wizard-app">
+        <aside className="wizard-panel">
+          <header className="wizard-brand">
+            {onBackHome && (
+              <button type="button" className="home-link" onClick={onBackHome}>
+                {t('common.backHome')}
+              </button>
+            )}
+            <BrandLogo />
+            <h1>{title}</h1>
+            {onStartGuide && (
+              <button
+                type="button"
+                className="guide-launch"
+                onClick={onStartGuide}
+              >
+                {t('common.howToPlay')}
+              </button>
+            )}
+          </header>
 
-        <div className="wizard-progress" aria-label={progressLabel}>
-          <div className="wizard-progress-track">
-            <div
-              className="wizard-progress-fill"
-              style={{ width: `${((stepIndex + 1) / stepTotal) * 100}%` }}
-            />
+          <div className="wizard-progress" aria-label={progressLabel}>
+            <div className="wizard-progress-track">
+              <div
+                className="wizard-progress-fill"
+                style={{ width: `${((stepIndex + 1) / stepTotal) * 100}%` }}
+              />
+            </div>
+            <span className="wizard-progress-label">{progressLabel}</span>
           </div>
-          <span className="wizard-progress-label">{progressLabel}</span>
-        </div>
 
-        <div className="wizard-question">{question}</div>
-        <AffiliateFooter />
-      </aside>
+          <div className="wizard-question">{question}</div>
+          <AffiliateFooter />
+        </aside>
+
+        <main className="wizard-stage">
+          <p className="preview-caption">{t('common.preview')}</p>
+          <section className="preview-panel">
+            <div className="preview-frame">{preview}</div>
+          </section>
+        </main>
+      </div>
 
       <AffiliatePopup
         open={affiliateOpen}
@@ -76,13 +89,6 @@ export function WizardShell({
         game={game}
         onClose={onCloseAffiliate}
       />
-
-      <main className="wizard-stage">
-        <p className="preview-caption">{t('common.preview')}</p>
-        <section className="preview-panel">
-          <div className="preview-frame">{preview}</div>
-        </section>
-      </main>
-    </div>
+    </>
   )
 }

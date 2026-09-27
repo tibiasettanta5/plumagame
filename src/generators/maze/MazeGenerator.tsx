@@ -240,6 +240,7 @@ export function MazeGenerator({ onBackHome }: Props) {
   }
 
   return (
+    <>
     <div className="maze-app">
       <aside className="wizard-panel">
         <header className="maze-brand">
@@ -511,14 +512,6 @@ export function MazeGenerator({ onBackHome }: Props) {
         <AffiliateFooter />
       </aside>
 
-      <AffiliatePopup
-        open={affiliatePopupOpen}
-        phase={downloadPhase}
-        progress={downloadProgress}
-        game="maze"
-        onClose={() => setAffiliatePopupOpen(false)}
-      />
-
       <main className="maze-stage">
         <p className="preview-caption">{t('common.preview')}</p>
         <section className="preview-panel">
@@ -534,5 +527,14 @@ export function MazeGenerator({ onBackHome }: Props) {
         </section>
       </main>
     </div>
+
+      <AffiliatePopup
+        open={affiliatePopupOpen}
+        phase={downloadPhase}
+        progress={downloadProgress}
+        game="maze"
+        onClose={() => setAffiliatePopupOpen(false)}
+      />
+    </>
   )
 }
