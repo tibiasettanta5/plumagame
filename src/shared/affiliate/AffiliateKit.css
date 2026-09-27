@@ -165,9 +165,9 @@
   box-shadow:
     0 14px 36px rgba(21, 32, 28, 0.1),
     0 0 0 0 rgba(61, 154, 120, 0);
-  opacity: 0;
-  transform: translateY(14px);
-  animation: affProductIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 1;
+  transform: none;
+  animation: affProductIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease,
@@ -175,7 +175,19 @@
 }
 
 @keyframes affProductIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
   to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aff-product {
+    animation: none;
     opacity: 1;
     transform: none;
   }

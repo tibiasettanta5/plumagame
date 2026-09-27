@@ -20,8 +20,9 @@ export function svgToJpegDataUrl(
     const match = svgMarkup.match(/width="(\d+(?:\.\d+)?)"[^>]*height="(\d+(?:\.\d+)?)"/)
     const w = match ? Number(match[1]) : 800
     const h = match ? Number(match[2]) : 800
-    const blob = new Blob([svgMarkup], { type: 'image/svg+xml;charset=utf-8' })
-    const url = URL.createObjectURL(blob)
+    // data: URL è più affidabile del Blob per SVG con unicode (es. ∧ ∨ in Futoshiki)
+    const url =
+      'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgMarkup)
     const img = new Image()
     img.onload = () => {
       const canvas = document.createElement('canvas')
@@ -29,14 +30,12 @@ export function svgToJpegDataUrl(
       canvas.height = Math.round(h * scale)
       const ctx = canvas.getContext('2d')
       if (!ctx) {
-        URL.revokeObjectURL(url)
         reject(new Error('Canvas non disponibile'))
         return
       }
       ctx.fillStyle = '#ffffff'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-      URL.revokeObjectURL(url)
       resolve({
         dataUrl: canvas.toDataURL('image/jpeg', 0.95),
         w: canvas.width,
@@ -44,7 +43,6 @@ export function svgToJpegDataUrl(
       })
     }
     img.onerror = () => {
-      URL.revokeObjectURL(url)
       reject(new Error('Impossibile renderizzare SVG'))
     }
     img.src = url
