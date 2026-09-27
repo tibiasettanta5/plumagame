@@ -1,0 +1,19 @@
+:root {
+  --ink: #171d2b;
+  --paper: #eef1f5;
+  --panel: #f7f8fb;
+  --line: #b9c2cf;
+  --accent: #1a5c4a;
+  --accent-ink: #0e3d32;
+  --signal: #c45c1a;
+  --muted: #5a6475;
+  --font-display: 'Bricolage Grotesque', 'Segoe UI', sans-serif;
+  --font-body: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+  --radius: 6px;
+  --radius-lg: 10px;
+  --shadow-none: none;
+  /* Texture carta (punti sparsi), non griglia “dev template” */
+  --paper-grid:
+    radial-gradient(rgba(23, 29, 43, 0.055) 0.7px, transparent 0.8px);
+  --paper-grid-size: 14px 14px;
+}

@@ -19,6 +19,7 @@ import {
 } from './types'
 import { GuideLayout } from '../../shared/guide'
 import { BrandLogo } from '../../shared/BrandLogo'
+import '../../shared/wizard/wizard.css'
 import './SudokuGenerator.css'
 import '../../shared/guide/guide.css'
 

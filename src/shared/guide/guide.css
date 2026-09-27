@@ -3,16 +3,16 @@
   font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent, #2f5d50);
-  font-weight: 600;
+  color: var(--signal, #c45c1a);
+  font-weight: 700;
 }
 
 .guide-brand h1 {
   margin: 0.2rem 0 0;
-  font-family: var(--font-display, 'Montserrat', system-ui, sans-serif);
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-weight: 800;
   font-size: 1.15rem;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   line-height: 1.2;
 }
 
@@ -94,7 +94,7 @@
   font: inherit;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--accent, #2f5d50);
+  color: var(--accent);
   cursor: pointer;
   text-decoration: underline;
   text-underline-offset: 3px;

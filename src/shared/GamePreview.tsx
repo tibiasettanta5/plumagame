@@ -7,7 +7,7 @@ const INK = '#1a1a1a'
 const MUTED = '#6b6560'
 const ACCENT = '#2f5d50'
 const WARM = '#c45c26'
-const PAPER = '#fffcf7'
+const PAPER = '#ffffff'
 
 type Props = {
   gameId: GameId

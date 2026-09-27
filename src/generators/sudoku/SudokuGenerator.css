@@ -1,27 +1,18 @@
 .sudoku-app {
-  --ink: #1a1a1a;
-  --paper: #ffffff;
-  --panel: #ffffff;
-  --line: #d4cfc4;
-  --accent: #2f5d50;
-  --accent-soft: #e4efe9;
-  --muted: #6b6560;
-  --font-display: 'Montserrat', system-ui, sans-serif;
-  --font-body: 'Montserrat', system-ui, sans-serif;
-
   display: grid;
   grid-template-columns: minmax(320px, 400px) 1fr;
   min-height: 100vh;
-  background: #fff;
+  background-color: var(--paper);
+  background-image: var(--paper-grid);
+  background-size: var(--paper-grid-size);
   color: var(--ink);
   font-family: var(--font-body);
 }
 
-.wizard-panel {
+.sudoku-app .wizard-panel {
   padding: 1.75rem 1.5rem 2rem;
-  border-right: 1px solid var(--line);
-  background: color-mix(in srgb, var(--panel) 94%, transparent);
-  backdrop-filter: blur(8px);
+  border-right: 2px solid var(--ink);
+  background: var(--panel);
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
@@ -90,7 +81,7 @@
 .wizard-progress-track {
   flex: 1;
   height: 6px;
-  border-radius: 999px;
+  border-radius: var(--radius);
   background: var(--line);
   overflow: hidden;
 }
@@ -98,7 +89,7 @@
 .wizard-progress-fill {
   height: 100%;
   background: var(--accent);
-  border-radius: 999px;
+  border-radius: var(--radius);
   transition: width 0.25s ease;
 }
 
@@ -167,7 +158,7 @@
 
 .answer-card:hover {
   border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
-  box-shadow: 0 6px 18px rgba(40, 30, 20, 0.06);
+  box-shadow: 2px 2px 0 color-mix(in srgb, var(--ink) 16%, transparent);
 }
 
 .answer-card strong {
@@ -201,7 +192,7 @@
 .chip {
   border: 1px solid var(--line);
   background: #fff;
-  border-radius: 999px;
+  border-radius: var(--radius);
   padding: 0.35rem 0.75rem;
   font: inherit;
   font-size: 0.8rem;
@@ -314,7 +305,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 12px 40px rgba(40, 30, 20, 0.06);
+  box-shadow: 4px 4px 0 color-mix(in srgb, var(--ink) 14%, transparent);
   min-height: min(72vh, 640px);
 }
 

@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,650;12..96,800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+@import './theme.css';
 
 *,
 *::before,
@@ -14,13 +15,21 @@ body,
 }
 
 body {
-  font-family: 'Montserrat', system-ui, sans-serif;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image: var(--paper-grid);
+  background-size: var(--paper-grid-size);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  background: #fff;
 }
 
 button,
 input {
   font: inherit;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 28%, white);
+  color: var(--ink);
 }

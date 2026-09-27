@@ -1,10 +1,10 @@
 .site-footer {
   margin-top: 2.5rem;
   padding: 2rem 1.25rem 1.5rem;
-  border-top: 1px solid #e6e2da;
-  background: #fafafa;
-  color: #5a5650;
-  font-family: 'Montserrat', system-ui, sans-serif;
+  border-top: 2px solid var(--ink);
+  background: var(--panel);
+  color: var(--muted);
+  font-family: var(--font-body);
   font-size: 0.88rem;
   line-height: 1.45;
 }
@@ -31,9 +31,9 @@
 .site-footer-contact a,
 .site-footer-contact-btn {
   margin: 0;
-  color: #2f5d50;
+  color: var(--accent);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .site-footer-contact-btn {
@@ -48,6 +48,7 @@
 .site-footer-contact a:hover,
 .site-footer-contact-btn:hover {
   text-decoration: underline;
+  color: var(--accent-ink);
 }
 
 .site-footer-nav {
@@ -59,11 +60,12 @@
 
 .site-footer-nav-title {
   margin: 0 0 0.2rem;
+  font-family: var(--font-display);
   font-size: 0.72rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  font-weight: 700;
-  color: #1a1a1a;
+  font-weight: 800;
+  color: var(--ink);
 }
 
 .site-footer-nav button {
@@ -71,9 +73,10 @@
   border: none;
   background: none;
   font: inherit;
-  color: #2f5d50;
+  color: var(--accent);
   cursor: pointer;
   text-align: left;
+  font-weight: 600;
 }
 
 .site-footer-nav button:hover {
@@ -84,13 +87,13 @@
   width: min(100%, 640px);
   margin: 1.5rem auto 0;
   padding-top: 1rem;
-  border-top: 1px solid #ebe7e0;
+  border-top: 1px solid var(--line);
 }
 
 .site-footer-copyright {
   margin: 0;
   font-size: 0.8rem;
-  color: #7a756e;
+  color: var(--muted);
   text-align: center;
 }
 
@@ -108,18 +111,17 @@
   display: grid;
   place-items: center;
   padding: 1rem;
-  background: rgba(10, 14, 12, 0.55);
-  backdrop-filter: blur(6px);
+  background: rgba(23, 29, 43, 0.62);
 }
 
 .legal-panel {
   width: min(100%, 560px);
   max-height: min(88vh, 720px);
   overflow: auto;
-  background: #fff;
-  border-radius: 16px;
-  border: 1px solid #e6e2da;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+  background: var(--panel);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--ink);
+  box-shadow: 5px 5px 0 color-mix(in srgb, var(--ink) 35%, transparent);
   padding: 1.25rem 1.35rem 1.5rem;
 }
 
@@ -133,28 +135,30 @@
 
 .legal-panel-head h2 {
   margin: 0;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #1a1a1a;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--ink);
   line-height: 1.25;
+  letter-spacing: -0.02em;
 }
 
 .legal-close {
-  border: none;
-  background: #f2f0eb;
+  border: 2px solid var(--ink);
+  background: #fff;
   width: 2rem;
   height: 2rem;
-  border-radius: 8px;
+  border-radius: var(--radius);
   font-size: 1.35rem;
   line-height: 1;
   cursor: pointer;
-  color: #1a1a1a;
+  color: var(--ink);
   flex-shrink: 0;
 }
 
 .legal-body p {
   margin: 0 0 0.85rem;
-  color: #4a4640;
+  color: var(--muted);
   font-size: 0.92rem;
   line-height: 1.55;
 }
@@ -173,14 +177,14 @@
   background: none;
   font: inherit;
   font-weight: 700;
-  color: #2f5d50;
+  color: var(--accent);
   cursor: pointer;
   text-decoration: underline;
 }
 
 .contact-intro {
   margin: 0 0 1rem;
-  color: #4a4640;
+  color: var(--muted);
   font-size: 0.92rem;
   line-height: 1.45;
 }
@@ -196,38 +200,39 @@
   flex-direction: column;
   gap: 0.35rem;
   font-size: 0.85rem;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-weight: 700;
+  color: var(--ink);
 }
 
 .contact-field input,
 .contact-field textarea {
   font: inherit;
   font-weight: 400;
-  border: 1px solid #d4cfc4;
-  border-radius: 10px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
   padding: 0.7rem 0.85rem;
-  color: #1a1a1a;
+  color: var(--ink);
   background: #fff;
   resize: vertical;
 }
 
 .contact-field input:focus,
 .contact-field textarea:focus {
-  outline: 2px solid color-mix(in srgb, #2f5d50 35%, transparent);
-  border-color: #2f5d50;
+  outline: 2px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  border-color: var(--accent);
 }
 
 .contact-submit {
   margin-top: 0.25rem;
-  border: none;
-  border-radius: 10px;
+  border: 2px solid var(--accent-ink);
+  border-radius: var(--radius);
   padding: 0.85rem 1.1rem;
   font: inherit;
   font-weight: 700;
   color: #fff;
-  background: #2f5d50;
+  background: var(--accent);
   cursor: pointer;
+  box-shadow: 2px 2px 0 color-mix(in srgb, var(--accent-ink) 55%, transparent);
 }
 
 .contact-submit:disabled {
@@ -242,8 +247,8 @@
 }
 
 .contact-status--ok {
-  color: #2f5d50;
-  font-weight: 600;
+  color: var(--accent);
+  font-weight: 700;
 }
 
 .contact-status--error {

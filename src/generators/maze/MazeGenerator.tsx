@@ -25,6 +25,7 @@ import {
   type Difficulty,
   type ExportFormat,
 } from './types'
+import '../../shared/wizard/wizard.css'
 import './MazeGenerator.css'
 import '../../shared/guide/guide.css'
 
