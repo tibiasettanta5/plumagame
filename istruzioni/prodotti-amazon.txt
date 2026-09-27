@@ -1,0 +1,60 @@
+COME AGGIUNGERE UN PRODOTTO AMAZON AL POPUP
+===========================================
+
+Ti servono solo 3 cose: il tag affiliato, una foto, e una riga nel file prodotti.
+Gli stessi prodotti compaiono nel popup di TUTTI i giochi.
+
+
+1) TAG AFFILIATO (una sola volta)
+---------------------------------
+Nel file .env (nella cartella del progetto):
+
+  VITE_AMAZON_ASSOCIATE_TAG=tuo-tag-21
+
+Poi riavvia il sito (ferma e rilancia npm run dev).
+
+
+2) FOTO DEL PRODOTTO
+--------------------
+1. Su Amazon, salva l’immagine del prodotto sul PC
+2. Copiala in:  public/affiliate/
+   Esempio: public/affiliate/carta-a4.jpg
+
+IMPORTANTE: usa solo file salvati qui. Non mettere link alle immagini di Amazon
+(spesso non si vedono).
+
+
+3) AGGIUNGI IL PRODOTTO
+-----------------------
+Apri:  src/shared/affiliate/popupProducts.config.ts
+
+Nell’array POPUP_PRODUCTS aggiungi un blocco così:
+
+  {
+    link: 'https://www.amazon.it/dp/B0XXXXXXXX',
+    image: '/affiliate/carta-a4.jpg',
+    title: 'Carta A4 500 fogli',
+    description: '',
+    price: '',
+  },
+
+- link = pagina Amazon del prodotto (o solo il codice B0…)
+- image = /affiliate/ + nome del file che hai salvato
+- title = testo sotto la foto
+- description e price = facoltativi (puoi lasciarli vuoti '')
+
+Salva, ricarica la pagina, fai un download e controlla il popup.
+
+
+RIMUOVERE UN PRODOTTO
+---------------------
+Cancella il blocco { ... } dall’array POPUP_PRODUCTS.
+Se vuoi, cancella anche la foto da public/affiliate/
+
+
+SE L’IMMAGINE NON SI VEDE
+-------------------------
+Controlla che:
+- il file sia davvero in public/affiliate/
+- il nome in image sia identico (anche maiuscole/minuscole)
+- inizi con /affiliate/

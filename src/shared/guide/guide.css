@@ -1,0 +1,105 @@
+.guide-brand-eyebrow {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent, #2f5d50);
+  font-weight: 600;
+}
+
+.guide-brand h1 {
+  margin: 0.2rem 0 0;
+  font-family: var(--font-display, 'Montserrat', system-ui, sans-serif);
+  font-weight: 600;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.guide-body {
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.guide-sim {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.guide-sim-frame {
+  padding: 1.25rem;
+}
+
+.guide-sim-frame svg {
+  max-width: 100%;
+  max-height: min(70vh, 620px);
+  height: auto;
+}
+
+.guide-stage {
+  padding: 1.5rem 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+}
+
+.guide-pulse {
+  animation: guidePulse 1.2s ease-in-out infinite;
+}
+
+.maze-guide-path-pulse path {
+  animation: guidePulse 1.2s ease-in-out infinite;
+}
+
+.maze-guide-chars-pulse image {
+  animation: guidePulse 1.2s ease-in-out infinite;
+}
+
+.maze-guide-walls-pulse g[stroke] line {
+  animation: guidePulse 1.2s ease-in-out infinite;
+}
+
+.guide-clue-pulse text {
+  animation: guidePulse 1.2s ease-in-out infinite;
+}
+
+.hashi-guide-islands circle,
+.hashi-guide-islands text {
+  animation: guidePulse 1.2s ease-in-out infinite;
+}
+
+.hashi-guide-double line {
+  animation: guidePulse 1.2s ease-in-out infinite;
+}
+
+@keyframes guidePulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.guide-launch {
+  margin-top: 0.55rem;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent, #2f5d50);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.guide-launch:hover {
+  color: var(--ink, #1a1a1a);
+}

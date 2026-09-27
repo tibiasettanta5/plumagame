@@ -1,0 +1,23 @@
+.brand-logo {
+  display: block;
+  width: auto;
+  max-width: min(100%, 320px);
+  height: 3.25rem;
+  object-fit: contain;
+  object-position: left center;
+  background: transparent;
+  image-rendering: auto;
+}
+
+.brand-logo--home {
+  height: clamp(4rem, 12vw, 5.5rem);
+  max-width: min(100%, 480px);
+  margin: 0 auto;
+  object-position: center;
+}
+
+.brand-logo--footer {
+  height: 1.65rem;
+  max-width: 140px;
+  object-position: left center;
+}

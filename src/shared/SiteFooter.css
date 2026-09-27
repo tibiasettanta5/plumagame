@@ -1,0 +1,260 @@
+.site-footer {
+  margin-top: 2.5rem;
+  padding: 2rem 1.25rem 1.5rem;
+  border-top: 1px solid #e6e2da;
+  background: #fafafa;
+  color: #5a5650;
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.site-footer-inner {
+  width: min(100%, 640px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 1.5rem 1.25rem;
+}
+
+.site-footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+
+.site-footer-brand p {
+  margin: 0;
+}
+
+.site-footer-contact a,
+.site-footer-contact-btn {
+  margin: 0;
+  color: #2f5d50;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.site-footer-contact-btn {
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.site-footer-contact a:hover,
+.site-footer-contact-btn:hover {
+  text-decoration: underline;
+}
+
+.site-footer-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+}
+
+.site-footer-nav-title {
+  margin: 0 0 0.2rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.site-footer-nav button {
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: #2f5d50;
+  cursor: pointer;
+  text-align: left;
+}
+
+.site-footer-nav button:hover {
+  text-decoration: underline;
+}
+
+.site-footer-bottom {
+  width: min(100%, 640px);
+  margin: 1.5rem auto 0;
+  padding-top: 1rem;
+  border-top: 1px solid #ebe7e0;
+}
+
+.site-footer-copyright {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #7a756e;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .site-footer-inner {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+.legal-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(10, 14, 12, 0.55);
+  backdrop-filter: blur(6px);
+}
+
+.legal-panel {
+  width: min(100%, 560px);
+  max-height: min(88vh, 720px);
+  overflow: auto;
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e6e2da;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+  padding: 1.25rem 1.35rem 1.5rem;
+}
+
+.legal-panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.legal-panel-head h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.25;
+}
+
+.legal-close {
+  border: none;
+  background: #f2f0eb;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 8px;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #1a1a1a;
+  flex-shrink: 0;
+}
+
+.legal-body p {
+  margin: 0 0 0.85rem;
+  color: #4a4640;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.legal-body p:last-child {
+  margin-bottom: 0;
+}
+
+.legal-contact-cta {
+  margin-top: 0.25rem !important;
+}
+
+.legal-inline-link {
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-weight: 700;
+  color: #2f5d50;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.contact-intro {
+  margin: 0 0 1rem;
+  color: #4a4640;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.contact-field input,
+.contact-field textarea {
+  font: inherit;
+  font-weight: 400;
+  border: 1px solid #d4cfc4;
+  border-radius: 10px;
+  padding: 0.7rem 0.85rem;
+  color: #1a1a1a;
+  background: #fff;
+  resize: vertical;
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus {
+  outline: 2px solid color-mix(in srgb, #2f5d50 35%, transparent);
+  border-color: #2f5d50;
+}
+
+.contact-submit {
+  margin-top: 0.25rem;
+  border: none;
+  border-radius: 10px;
+  padding: 0.85rem 1.1rem;
+  font: inherit;
+  font-weight: 700;
+  color: #fff;
+  background: #2f5d50;
+  cursor: pointer;
+}
+
+.contact-submit:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.contact-status {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.contact-status--ok {
+  color: #2f5d50;
+  font-weight: 600;
+}
+
+.contact-status--error {
+  color: #a34444;
+}
+
+.contact-honeypot {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
