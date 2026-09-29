@@ -243,9 +243,11 @@ export function SolutionsStep({
 export function FormatStep({
   onPdf,
   onJpg,
+  onPrint,
 }: {
   onPdf: () => void
   onJpg: () => void
+  onPrint: () => void
 }) {
   const t = useT()
   return (
@@ -260,6 +262,10 @@ export function FormatStep({
           <strong>{t('wizard.jpg')}</strong>
           <span>{t('wizard.jpg.hint')}</span>
         </button>
+        <button type="button" className="answer-card" onClick={onPrint}>
+          <strong>{t('wizard.print')}</strong>
+          <span>{t('wizard.print.hint')}</span>
+        </button>
       </div>
     </>
   )
@@ -269,21 +275,17 @@ export function SummaryStep({
   rows,
   busy,
   downloadLabel,
-  printLabel,
   restartLabel,
   onRestart,
   onDownload,
-  onPrint,
   status,
 }: {
   rows: { label: string; value: string }[]
   busy: boolean
   downloadLabel: string
-  printLabel: string
   restartLabel: string
   onRestart: () => void
   onDownload: () => void
-  onPrint: () => void
   status: string | null
 }) {
   const t = useT()
@@ -302,9 +304,6 @@ export function SummaryStep({
       <div className="actions">
         <button type="button" className="btn" onClick={onRestart} disabled={busy}>
           {restartLabel}
-        </button>
-        <button type="button" className="btn" onClick={onPrint} disabled={busy}>
-          {busy ? t('common.waiting') : printLabel}
         </button>
         <button
           type="button"

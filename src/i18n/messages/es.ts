@@ -82,6 +82,8 @@ export const es: Dict = {
   'wizard.pdf.hint': 'Ideal para imprimir',
   'wizard.jpg': 'JPG',
   'wizard.jpg.hint': 'Imágenes sueltas o ZIP',
+  'wizard.print': 'Imprimir',
+  'wizard.print.hint': 'Enviar a la impresora ahora',
   'wizard.gridTitle': '¿Qué cuadrícula quieres?',
   'wizard.gridSub': 'Elige el tamaño del Sudoku.',
   'wizard.size4': '4×4',

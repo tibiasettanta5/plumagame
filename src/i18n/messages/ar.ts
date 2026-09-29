@@ -82,6 +82,8 @@ export const ar: Dict = {
   'wizard.pdf.hint': 'الأفضل للطباعة',
   'wizard.jpg': 'JPG',
   'wizard.jpg.hint': 'صور منفردة أو ZIP',
+  'wizard.print': 'طباعة',
+  'wizard.print.hint': 'أرسل إلى الطابعة الآن',
   'wizard.gridTitle': 'أي شبكة تريد؟',
   'wizard.gridSub': 'اختر حجم السودوكو.',
   'wizard.size4': '4×4',

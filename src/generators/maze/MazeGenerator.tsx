@@ -464,6 +464,15 @@ export function MazeGenerator({ onBackHome }: Props) {
                   <strong>{t('wizard.jpg')}</strong>
                   <span>{t('wizard.jpg.hint')}</span>
                 </button>
+                <button
+                  type="button"
+                  className="answer-card"
+                  onClick={handlePrint}
+                  disabled={busy}
+                >
+                  <strong>{t('wizard.print')}</strong>
+                  <span>{t('wizard.print.hint')}</span>
+                </button>
               </div>
             </>
           )}
@@ -509,18 +518,6 @@ export function MazeGenerator({ onBackHome }: Props) {
                   disabled={busy}
                 >
                   {t('restart.maze')}
-                </button>
-                <button
-                  type="button"
-                  className="btn"
-                  onClick={handlePrint}
-                  disabled={busy}
-                >
-                  {busy
-                    ? t('common.waiting')
-                    : t('common.printN', {
-                        n: `${batchCount} ${t('noun.mazes')}`,
-                      })}
                 </button>
                 <button
                   type="button"

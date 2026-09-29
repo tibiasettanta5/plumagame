@@ -82,6 +82,8 @@ export const ja: Dict = {
   'wizard.pdf.hint': '印刷に最適',
   'wizard.jpg': 'JPG',
   'wizard.jpg.hint': '単体画像または ZIP',
+  'wizard.print': '印刷',
+  'wizard.print.hint': 'すぐにプリンターへ送る',
   'wizard.gridTitle': 'どのグリッドにしますか？',
   'wizard.gridSub': '数独のサイズを選んでください',
   'wizard.size4': '4×4',

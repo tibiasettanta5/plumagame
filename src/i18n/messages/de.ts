@@ -82,6 +82,8 @@ export const de: Dict = {
   'wizard.pdf.hint': 'Am besten zum Drucken',
   'wizard.jpg': 'JPG',
   'wizard.jpg.hint': 'Einzelbilder oder ZIP',
+  'wizard.print': 'Drucken',
+  'wizard.print.hint': 'Sofort an den Drucker senden',
   'wizard.gridTitle': 'Welches Raster?',
   'wizard.gridSub': 'Sudoku-Größe wählen.',
   'wizard.size4': '4×4',

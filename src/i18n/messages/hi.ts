@@ -82,6 +82,8 @@ export const hi: Dict = {
   'wizard.pdf.hint': 'प्रिंट के लिए सर्वोत्तम',
   'wizard.jpg': 'JPG',
   'wizard.jpg.hint': 'अलग-अलग चित्र या ZIP',
+  'wizard.print': 'प्रिंट',
+  'wizard.print.hint': 'अभी प्रिंटर पर भेजें',
   'wizard.gridTitle': 'कौन-सी ग्रिड चाहिए?',
   'wizard.gridSub': 'सुडोकू का आकार चुनें',
   'wizard.size4': '4×4',

@@ -82,6 +82,8 @@ export const ru: Dict = {
   'wizard.pdf.hint': 'Лучше для печати',
   'wizard.jpg': 'JPG',
   'wizard.jpg.hint': 'Отдельные изображения или ZIP',
+  'wizard.print': 'Печать',
+  'wizard.print.hint': 'Сразу отправить на принтер',
   'wizard.gridTitle': 'Какую сетку выбрать?',
   'wizard.gridSub': 'Выберите размер судоку.',
   'wizard.size4': '4×4',

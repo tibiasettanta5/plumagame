@@ -187,6 +187,9 @@ export function createPuzzleGenerator<T, TSim extends string = string>(opts: {
             w.setFormat('jpg')
             w.setStep('summary')
           }}
+          onPrint={() => {
+            void handlePrint()
+          }}
         />
       )
     } else if (w.step === 'summary') {
@@ -213,13 +216,9 @@ export function createPuzzleGenerator<T, TSim extends string = string>(opts: {
           downloadLabel={t('common.downloadN', {
             n: `${w.batchCount} ${t(opts.nounKey)}`,
           })}
-          printLabel={t('common.printN', {
-            n: `${w.batchCount} ${t(opts.nounKey)}`,
-          })}
           restartLabel={t(opts.restartKey)}
           onRestart={() => w.restart()}
           onDownload={handleDownload}
-          onPrint={handlePrint}
           status={w.status}
         />
       )

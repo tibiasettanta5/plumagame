@@ -82,6 +82,8 @@ export const zh: Dict = {
   'wizard.pdf.hint': '最适合打印',
   'wizard.jpg': 'JPG',
   'wizard.jpg.hint': '单张图片或 ZIP',
+  'wizard.print': '打印',
+  'wizard.print.hint': '立即发送到打印机',
   'wizard.gridTitle': '选择哪种网格？',
   'wizard.gridSub': '选择数独尺寸',
   'wizard.size4': '4×4',
