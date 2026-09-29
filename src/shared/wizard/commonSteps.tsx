@@ -10,6 +10,8 @@ import { randomSeed } from '../rng'
 
 export type Difficulty = 'easy' | 'medium' | 'hard'
 
+export type DeliveryMode = 'download' | 'print'
+
 export type CommonStep = 'difficulty' | 'count' | 'solutions' | 'format' | 'summary'
 
 type DownloadArgs = {
@@ -19,6 +21,7 @@ type DownloadArgs = {
   statusPlural: string
   download: () => Promise<void>
   t: TFunction
+  delivery?: DeliveryMode
 }
 
 export function usePrintWizard(
@@ -40,6 +43,7 @@ export function usePrintWizard(
   const [affiliatePopupOpen, setAffiliatePopupOpen] = useState(false)
   const [downloadPhase, setDownloadPhase] = useState<DownloadPhase>('generating')
   const [downloadProgress, setDownloadProgress] = useState(0)
+  const [deliveryMode, setDeliveryMode] = useState<DeliveryMode>('download')
 
   const stepIndex = Math.max(0, stepOrder.indexOf(step))
   const stepTotal = stepOrder.length
@@ -62,19 +66,26 @@ export function usePrintWizard(
     setAffiliatePopupOpen(false)
     setDownloadPhase('generating')
     setDownloadProgress(0)
+    setDeliveryMode('download')
     setSeed(randomSeed())
   }
 
   async function runDownload(args: DownloadArgs) {
     const { t } = args
+    const delivery = args.delivery ?? 'download'
+    setDeliveryMode(delivery)
     setBusy(true)
     setDownloadPhase('generating')
     setDownloadProgress(0)
     setAffiliatePopupOpen(true)
     setStatus(
-      args.batchCount > 1
-        ? t('common.generatingN', { n: `${args.batchCount} ${args.statusPlural}` })
-        : t('common.preparingDownload'),
+      delivery === 'print'
+        ? t('common.preparingPrint')
+        : args.batchCount > 1
+          ? t('common.generatingN', {
+              n: `${args.batchCount} ${args.statusPlural}`,
+            })
+          : t('common.preparingDownload'),
     )
     try {
       await runFakeProgress(fakeGenerationMs(args.batchCount), setDownloadProgress)
@@ -82,20 +93,24 @@ export function usePrintWizard(
       setDownloadProgress(100)
       setDownloadPhase('ready')
       setStatus(
-        args.includeSolutions
-          ? t('common.downloadedWithSolutions', {
-              n: args.batchCount,
-              format: args.format.toUpperCase(),
-            })
-          : t('common.downloaded', {
-              n: args.batchCount,
-              format: args.format.toUpperCase(),
-            }),
+        delivery === 'print'
+          ? t('common.printed')
+          : args.includeSolutions
+            ? t('common.downloadedWithSolutions', {
+                n: args.batchCount,
+                format: args.format.toUpperCase(),
+              })
+            : t('common.downloaded', {
+                n: args.batchCount,
+                format: args.format.toUpperCase(),
+              }),
       )
     } catch (err) {
       console.error(err)
       setDownloadPhase('error')
-      setStatus(t('common.errorDownload'))
+      setStatus(
+        delivery === 'print' ? t('common.errorPrint') : t('common.errorDownload'),
+      )
     } finally {
       setBusy(false)
     }
@@ -123,13 +138,13 @@ export function usePrintWizard(
     setAffiliatePopupOpen,
     downloadPhase,
     downloadProgress,
+    deliveryMode,
     goToNext,
     selectDifficulty,
     restart,
     runDownload,
   }
 }
-
 export function DifficultyStep({
   onSelect,
   subKey = 'diff.sub',
@@ -254,17 +269,21 @@ export function SummaryStep({
   rows,
   busy,
   downloadLabel,
+  printLabel,
   restartLabel,
   onRestart,
   onDownload,
+  onPrint,
   status,
 }: {
   rows: { label: string; value: string }[]
   busy: boolean
   downloadLabel: string
+  printLabel: string
   restartLabel: string
   onRestart: () => void
   onDownload: () => void
+  onPrint: () => void
   status: string | null
 }) {
   const t = useT()
@@ -283,6 +302,9 @@ export function SummaryStep({
       <div className="actions">
         <button type="button" className="btn" onClick={onRestart} disabled={busy}>
           {restartLabel}
+        </button>
+        <button type="button" className="btn" onClick={onPrint} disabled={busy}>
+          {busy ? t('common.waiting') : printLabel}
         </button>
         <button
           type="button"

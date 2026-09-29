@@ -11,7 +11,7 @@ export const ja: Dict = {
   'common.startCreating': '作成を始める',
   'common.backHome': '← すべてのゲーム',
   'common.ready': '準備完了',
-  'common.checkDownload': '選択内容を確認してダウンロードしてください',
+  'common.checkDownload': '選択内容を確認してダウンロードまたは印刷してください',
   'common.solutions': '解答',
   'common.format': '形式',
   'common.quantity': '枚数',
@@ -23,6 +23,10 @@ export const ja: Dict = {
   'common.downloadedWithSolutions':
     'ダウンロード完了：{n} + 解答（{format}）',
   'common.downloadN': '{n} をダウンロード',
+  'common.printN': '{n} を印刷',
+  'common.preparingPrint': '印刷を準備中…',
+  'common.printed': '印刷ダイアログを開きました',
+  'common.errorPrint': '印刷に失敗しました。もう一度お試しください',
   'common.guide': 'ガイド · {game}',
   'common.comeSiGioca': '遊び方',
 
@@ -114,6 +118,8 @@ export const ja: Dict = {
   'aff.disclosure':
     'Amazon アソシエイトとして、対象となる購入から報酬を得ています',
   'aff.ready': 'ファイルの準備ができました',
+  'aff.print.preparing': '印刷を準備中',
+  'aff.print.ready': '印刷の準備ができました',
   'aff.error': '問題が発生しました',
   'aff.gen.maze': '迷路を生成しています',
   'aff.gen.sudoku': '数独を生成しています',

@@ -1,7 +1,7 @@
 import { useMemo, useState, type ReactNode } from 'react'
 import { useT } from '../../i18n'
 import type { PopupGame } from '../../shared/affiliate/popupProducts.config'
-import { exportSvgPuzzlesAsJpg, exportSvgPuzzlesAsPdf } from '../../shared/exportSvg'
+import { exportSvgPuzzlesAsJpg, exportSvgPuzzlesAsPdf, printSvgPuzzles } from '../../shared/exportSvg'
 import { GuideLayout, type GuideStep } from '../../shared/guide'
 import { randomSeed } from '../../shared/rng'
 import { WizardShell } from '../../shared/wizard'
@@ -67,6 +67,7 @@ export function createPuzzleGenerator<T, TSim extends string = string>(opts: {
         includeSolutions,
         statusPlural: t(opts.nounKey),
         t,
+        delivery: 'download',
         download: async () => {
           const items =
             w.batchCount === 1
@@ -92,6 +93,30 @@ export function createPuzzleGenerator<T, TSim extends string = string>(opts: {
               toSvg,
             })
           }
+        },
+      })
+    }
+
+    async function handlePrint() {
+      await w.runDownload({
+        batchCount: w.batchCount,
+        format: w.format,
+        includeSolutions,
+        statusPlural: t(opts.nounKey),
+        t,
+        delivery: 'print',
+        download: async () => {
+          const items =
+            w.batchCount === 1
+              ? [puzzle]
+              : Array.from({ length: w.batchCount }, () =>
+                  opts.generate(w.difficulty, randomSeed()),
+                )
+          await printSvgPuzzles({
+            items,
+            includeSolutions,
+            toSvg: (item, showSolution) => opts.toSvg(item as T, showSolution),
+          })
         },
       })
     }
@@ -188,9 +213,13 @@ export function createPuzzleGenerator<T, TSim extends string = string>(opts: {
           downloadLabel={t('common.downloadN', {
             n: `${w.batchCount} ${t(opts.nounKey)}`,
           })}
+          printLabel={t('common.printN', {
+            n: `${w.batchCount} ${t(opts.nounKey)}`,
+          })}
           restartLabel={t(opts.restartKey)}
           onRestart={() => w.restart()}
           onDownload={handleDownload}
+          onPrint={handlePrint}
           status={w.status}
         />
       )
@@ -215,6 +244,7 @@ export function createPuzzleGenerator<T, TSim extends string = string>(opts: {
         downloadProgress={w.downloadProgress}
         onCloseAffiliate={() => w.setAffiliatePopupOpen(false)}
         game={opts.game}
+        delivery={w.deliveryMode}
       />
     )
   }

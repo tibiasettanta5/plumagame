@@ -11,7 +11,7 @@ export const it: Dict = {
   'common.startCreating': 'Inizia a creare',
   'common.backHome': '← Tutti i giochi',
   'common.ready': 'Tutto pronto',
-  'common.checkDownload': 'Controlla le scelte e scarica.',
+  'common.checkDownload': 'Controlla le scelte, poi scarica o stampa.',
   'common.solutions': 'Soluzioni',
   'common.format': 'Formato',
   'common.quantity': 'Quantità',
@@ -23,6 +23,10 @@ export const it: Dict = {
   'common.downloadedWithSolutions':
     'Scaricato: {n} + soluzioni ({format}).',
   'common.downloadN': 'Scarica {n}',
+  'common.printN': 'Stampa {n}',
+  'common.preparingPrint': 'Stampa in preparazione…',
+  'common.printed': 'Finestra di stampa aperta.',
+  'common.errorPrint': 'Errore durante la stampa. Riprova.',
   'common.guide': 'Guida · {game}',
   'common.comeSiGioca': 'Come si gioca',
 
@@ -114,6 +118,8 @@ export const it: Dict = {
   'aff.disclosure':
     'In qualità di Affiliato Amazon, ricevo un guadagno dagli acquisti idonei.',
   'aff.ready': 'I tuoi file sono pronti',
+  'aff.print.preparing': 'Stampa in preparazione',
+  'aff.print.ready': 'Pronto per la stampa',
   'aff.error': 'Qualcosa è andato storto',
   'aff.gen.maze': 'Stiamo generando i tuoi labirinti',
   'aff.gen.sudoku': 'Stiamo generando i tuoi sudoku',

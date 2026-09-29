@@ -1,5 +1,6 @@
 import { jsPDF } from 'jspdf'
 import JSZip from 'jszip'
+import { printJpegPages } from '../../shared/exportSvg'
 import type { CharacterTheme } from './characters'
 import { mazeToSvgMarkup } from './MazeSvg'
 import type { Maze, Point } from './types'
@@ -137,4 +138,26 @@ export async function exportMazesAsPdf(
   }
 
   pdf.save(items.length === 1 ? 'labirinto.pdf' : 'labirinti.pdf')
+}
+
+export async function printMazes(
+  items: MazeExportItem[],
+  theme: CharacterTheme,
+  includeSolutions: boolean,
+): Promise<void> {
+  const pages: string[] = []
+  for (let i = 0; i < items.length; i++) {
+    const puzzleSvg = await mazeToSvgMarkup(items[i].maze, theme, {
+      showSolution: false,
+    })
+    pages.push((await svgToJpegDataUrl(puzzleSvg, 2)).dataUrl)
+    if (includeSolutions) {
+      const solSvg = await mazeToSvgMarkup(items[i].maze, theme, {
+        solution: items[i].solution,
+        showSolution: true,
+      })
+      pages.push((await svgToJpegDataUrl(solSvg, 2)).dataUrl)
+    }
+  }
+  await printJpegPages(pages)
 }

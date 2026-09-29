@@ -5,9 +5,10 @@ import {
   AffiliatePopup,
   fakeGenerationMs,
   runFakeProgress,
+  type DeliveryMode,
   type DownloadPhase,
 } from '../../shared/affiliate'
-import { exportSudokusAsJpg, exportSudokusAsPdf, type SudokuExportItem } from './exportSudokus'
+import { exportSudokusAsJpg, exportSudokusAsPdf, printSudokus, type SudokuExportItem } from './exportSudokus'
 import { generateSudoku } from './generateSudoku'
 import { randomSeed } from './rng'
 import { SUDOKU_GUIDE_SIMS, SudokuGuideSim } from './SudokuGuide'
@@ -54,6 +55,7 @@ export function SudokuGenerator({ onBackHome }: Props) {
   const [affiliatePopupOpen, setAffiliatePopupOpen] = useState(false)
   const [downloadPhase, setDownloadPhase] = useState<DownloadPhase>('generating')
   const [downloadProgress, setDownloadProgress] = useState(0)
+  const [deliveryMode, setDeliveryMode] = useState<DeliveryMode>('download')
 
   const puzzle = useMemo(
     () => generateSudoku(size, difficulty, seed),
@@ -97,24 +99,28 @@ export function SudokuGenerator({ onBackHome }: Props) {
     return items
   }
 
-  async function handleDownload() {
+  async function handleExport(delivery: DeliveryMode) {
+    setDeliveryMode(delivery)
     setBusy(true)
     setDownloadPhase('generating')
     setDownloadProgress(0)
     setAffiliatePopupOpen(true)
     setStatus(
-      batchCount > 1
-        ? t('common.generatingN', { n: `${batchCount} ${t('noun.sudoku')}` })
-        : t('common.preparingDownload'),
+      delivery === 'print'
+        ? t('common.preparingPrint')
+        : batchCount > 1
+          ? t('common.generatingN', { n: `${batchCount} ${t('noun.sudoku')}` })
+          : t('common.preparingDownload'),
     )
 
     try {
       await runFakeProgress(fakeGenerationMs(batchCount), setDownloadProgress)
 
-      const items =
-        batchCount === 1 ? [{ puzzle }] : buildBatch()
+      const items = batchCount === 1 ? [{ puzzle }] : buildBatch()
 
-      if (format === 'jpg') {
+      if (delivery === 'print') {
+        await printSudokus(items, includeSolutions)
+      } else if (format === 'jpg') {
         await exportSudokusAsJpg(items, includeSolutions)
       } else {
         await exportSudokusAsPdf(items, includeSolutions)
@@ -123,23 +129,35 @@ export function SudokuGenerator({ onBackHome }: Props) {
       setDownloadProgress(100)
       setDownloadPhase('ready')
       setStatus(
-        includeSolutions
-          ? t('common.downloadedWithSolutions', {
-              n: items.length,
-              format: format.toUpperCase(),
-            })
-          : t('common.downloaded', {
-              n: items.length,
-              format: format.toUpperCase(),
-            }),
+        delivery === 'print'
+          ? t('common.printed')
+          : includeSolutions
+            ? t('common.downloadedWithSolutions', {
+                n: items.length,
+                format: format.toUpperCase(),
+              })
+            : t('common.downloaded', {
+                n: items.length,
+                format: format.toUpperCase(),
+              }),
       )
     } catch (err) {
       console.error(err)
       setDownloadPhase('error')
-      setStatus(t('common.errorDownload'))
+      setStatus(
+        delivery === 'print' ? t('common.errorPrint') : t('common.errorDownload'),
+      )
     } finally {
       setBusy(false)
     }
+  }
+
+  function handleDownload() {
+    void handleExport('download')
+  }
+
+  function handlePrint() {
+    void handleExport('print')
   }
 
   function restartWizard() {
@@ -374,6 +392,18 @@ export function SudokuGenerator({ onBackHome }: Props) {
                 </button>
                 <button
                   type="button"
+                  className="btn"
+                  onClick={handlePrint}
+                  disabled={busy}
+                >
+                  {busy
+                    ? t('common.waiting')
+                    : t('common.printN', {
+                        n: `${batchCount} ${t('noun.sudoku')}`,
+                      })}
+                </button>
+                <button
+                  type="button"
                   className="btn accent"
                   onClick={handleDownload}
                   disabled={busy}
@@ -412,6 +442,7 @@ export function SudokuGenerator({ onBackHome }: Props) {
         phase={downloadPhase}
         progress={downloadProgress}
         game="sudoku"
+        delivery={deliveryMode}
         onClose={() => setAffiliatePopupOpen(false)}
       />
     </>

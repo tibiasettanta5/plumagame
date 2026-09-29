@@ -11,7 +11,7 @@ export const ru: Dict = {
   'common.startCreating': 'Начать создание',
   'common.backHome': '← Все игры',
   'common.ready': 'Всё готово',
-  'common.checkDownload': 'Проверьте настройки и скачайте.',
+  'common.checkDownload': 'Проверьте настройки, затем скачайте или напечатайте.',
   'common.solutions': 'Ответы',
   'common.format': 'Формат',
   'common.quantity': 'Количество',
@@ -23,6 +23,10 @@ export const ru: Dict = {
   'common.downloadedWithSolutions':
     'Скачано: {n} + ответы ({format}).',
   'common.downloadN': 'Скачать {n}',
+  'common.printN': 'Печать {n}',
+  'common.preparingPrint': 'Подготовка печати…',
+  'common.printed': 'Открыто окно печати.',
+  'common.errorPrint': 'Ошибка печати. Попробуйте снова.',
   'common.guide': 'Справка · {game}',
   'common.comeSiGioca': 'Как играть',
 
@@ -114,6 +118,8 @@ export const ru: Dict = {
   'aff.disclosure':
     'Как партнёр Amazon я получаю вознаграждение за подходящие покупки.',
   'aff.ready': 'Ваши файлы готовы',
+  'aff.print.preparing': 'Печать готовится',
+  'aff.print.ready': 'Готово к печати',
   'aff.error': 'Что-то пошло не так',
   'aff.gen.maze': 'Создаём ваши лабиринты',
   'aff.gen.sudoku': 'Создаём ваши судоку',

@@ -5,12 +5,13 @@ import {
   AffiliatePopup,
   fakeGenerationMs,
   runFakeProgress,
+  type DeliveryMode,
   type DownloadPhase,
 } from '../../shared/affiliate'
 import { GuideLayout } from '../../shared/guide'
 import { BrandLogo } from '../../shared/BrandLogo'
 import type { ThemeId } from './characters'
-import { exportMazesAsJpg, exportMazesAsPdf, type MazeExportItem } from './exportMazes'
+import { exportMazesAsJpg, exportMazesAsPdf, printMazes, type MazeExportItem } from './exportMazes'
 import { generateMaze } from './generateMaze'
 import { MAZE_GUIDE_SIMS, MazeGuideSimView } from './MazeGuide'
 import { MazeSvg } from './MazeSvg'
@@ -91,6 +92,7 @@ export function MazeGenerator({ onBackHome }: Props) {
   const [affiliatePopupOpen, setAffiliatePopupOpen] = useState(false)
   const [downloadPhase, setDownloadPhase] = useState<DownloadPhase>('generating')
   const [downloadProgress, setDownloadProgress] = useState(0)
+  const [deliveryMode, setDeliveryMode] = useState<DeliveryMode>('download')
 
   const theme = useMemo(() => getTheme(themeId), [themeId])
   const previewSize = sizeForDifficulty(difficulty, customWidth, customHeight)
@@ -157,19 +159,21 @@ export function MazeGenerator({ onBackHome }: Props) {
     return items
   }
 
-  async function handleDownload() {
+  async function handleExport(delivery: DeliveryMode) {
+    setDeliveryMode(delivery)
     setBusy(true)
     setDownloadPhase('generating')
     setDownloadProgress(0)
     setAffiliatePopupOpen(true)
     setStatus(
-      batchCount > 1
-        ? t('common.generatingN', { n: `${batchCount} ${t('noun.mazes')}` })
-        : t('common.preparingDownload'),
+      delivery === 'print'
+        ? t('common.preparingPrint')
+        : batchCount > 1
+          ? t('common.generatingN', { n: `${batchCount} ${t('noun.mazes')}` })
+          : t('common.preparingDownload'),
     )
 
     try {
-      // Finta generazione: popup visibile con prodotti Amazon mentre aspetta
       await runFakeProgress(fakeGenerationMs(batchCount), setDownloadProgress)
 
       const items =
@@ -177,7 +181,9 @@ export function MazeGenerator({ onBackHome }: Props) {
           ? [{ maze, solution: solveMaze(maze) }]
           : buildBatch()
 
-      if (format === 'jpg') {
+      if (delivery === 'print') {
+        await printMazes(items, theme, includeSolutions)
+      } else if (format === 'jpg') {
         await exportMazesAsJpg(items, theme, includeSolutions)
       } else {
         await exportMazesAsPdf(items, theme, includeSolutions)
@@ -186,23 +192,35 @@ export function MazeGenerator({ onBackHome }: Props) {
       setDownloadProgress(100)
       setDownloadPhase('ready')
       setStatus(
-        includeSolutions
-          ? t('common.downloadedWithSolutions', {
-              n: items.length,
-              format: format.toUpperCase(),
-            })
-          : t('common.downloaded', {
-              n: items.length,
-              format: format.toUpperCase(),
-            }),
+        delivery === 'print'
+          ? t('common.printed')
+          : includeSolutions
+            ? t('common.downloadedWithSolutions', {
+                n: items.length,
+                format: format.toUpperCase(),
+              })
+            : t('common.downloaded', {
+                n: items.length,
+                format: format.toUpperCase(),
+              }),
       )
     } catch (err) {
       console.error(err)
       setDownloadPhase('error')
-      setStatus(t('common.errorDownload'))
+      setStatus(
+        delivery === 'print' ? t('common.errorPrint') : t('common.errorDownload'),
+      )
     } finally {
       setBusy(false)
     }
+  }
+
+  function handleDownload() {
+    void handleExport('download')
+  }
+
+  function handlePrint() {
+    void handleExport('print')
   }
 
   const difficultySummaryText = difficultySummary(
@@ -494,6 +512,18 @@ export function MazeGenerator({ onBackHome }: Props) {
                 </button>
                 <button
                   type="button"
+                  className="btn"
+                  onClick={handlePrint}
+                  disabled={busy}
+                >
+                  {busy
+                    ? t('common.waiting')
+                    : t('common.printN', {
+                        n: `${batchCount} ${t('noun.mazes')}`,
+                      })}
+                </button>
+                <button
+                  type="button"
                   className="btn accent"
                   onClick={handleDownload}
                   disabled={busy}
@@ -534,6 +564,7 @@ export function MazeGenerator({ onBackHome }: Props) {
         phase={downloadPhase}
         progress={downloadProgress}
         game="maze"
+        delivery={deliveryMode}
         onClose={() => setAffiliatePopupOpen(false)}
       />
     </>

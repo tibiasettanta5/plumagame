@@ -11,7 +11,7 @@ export const hi: Dict = {
   'common.startCreating': 'बनाना शुरू करें',
   'common.backHome': '← सभी गेम',
   'common.ready': 'सब तैयार',
-  'common.checkDownload': 'अपनी पसंद जाँचें और डाउनलोड करें',
+  'common.checkDownload': 'अपनी पसंद जाँचें, फिर डाउनलोड या प्रिंट करें',
   'common.solutions': 'हल',
   'common.format': 'फ़ॉर्मैट',
   'common.quantity': 'संख्या',
@@ -23,6 +23,10 @@ export const hi: Dict = {
   'common.downloadedWithSolutions':
     'डाउनलोड: {n} + हल ({format})',
   'common.downloadN': '{n} डाउनलोड करें',
+  'common.printN': '{n} प्रिंट करें',
+  'common.preparingPrint': 'प्रिंट तैयार हो रहा है…',
+  'common.printed': 'प्रिंट डायलॉग खोला गया।',
+  'common.errorPrint': 'प्रिंट में त्रुटि। फिर कोशिश करें',
   'common.guide': 'गाइड · {game}',
   'common.comeSiGioca': 'कैसे खेलें',
 
@@ -114,6 +118,8 @@ export const hi: Dict = {
   'aff.disclosure':
     'Amazon सहयोगी के रूप में, मैं योग्य खरीद पर कमाई करता/करती हूँ',
   'aff.ready': 'आपकी फ़ाइलें तैयार हैं',
+  'aff.print.preparing': 'प्रिंट तैयार हो रहा है',
+  'aff.print.ready': 'प्रिंट के लिए तैयार',
   'aff.error': 'कुछ गलत हो गया',
   'aff.gen.maze': 'आपकी भूलभुलैया बन रही हैं',
   'aff.gen.sudoku': 'आपके सुडोकू बन रहे हैं',

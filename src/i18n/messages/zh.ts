@@ -11,7 +11,7 @@ export const zh: Dict = {
   'common.startCreating': '开始制作',
   'common.backHome': '← 全部游戏',
   'common.ready': '一切就绪',
-  'common.checkDownload': '确认选项后下载',
+  'common.checkDownload': '确认选项后下载或打印',
   'common.solutions': '答案',
   'common.format': '格式',
   'common.quantity': '数量',
@@ -23,6 +23,10 @@ export const zh: Dict = {
   'common.downloadedWithSolutions':
     '已下载：{n} + 答案（{format}）',
   'common.downloadN': '下载 {n}',
+  'common.printN': '打印 {n}',
+  'common.preparingPrint': '正在准备打印…',
+  'common.printed': '已打开打印对话框。',
+  'common.errorPrint': '打印出错，请重试',
   'common.guide': '指南 · {game}',
   'common.comeSiGioca': '玩法说明',
 
@@ -114,6 +118,8 @@ export const zh: Dict = {
   'aff.disclosure':
     '作为 Amazon 联盟伙伴，我从符合条件的购买中获得收入',
   'aff.ready': '文件已就绪',
+  'aff.print.preparing': '正在准备打印',
+  'aff.print.ready': '可以打印了',
   'aff.error': '出了点问题',
   'aff.gen.maze': '正在生成迷宫',
   'aff.gen.sudoku': '正在生成数独',

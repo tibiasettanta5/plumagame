@@ -1,5 +1,6 @@
 import { jsPDF } from 'jspdf'
 import JSZip from 'jszip'
+import { printJpegPages } from '../../shared/exportSvg'
 import { sudokuToSvgMarkup } from './SudokuSvg'
 import type { SudokuPuzzle } from './types'
 
@@ -142,4 +143,39 @@ export async function exportSudokusAsPdf(
   }
 
   pdf.save(items.length === 1 ? 'sudoku.pdf' : 'sudoku.pdf')
+}
+
+export async function printSudokus(
+  items: SudokuExportItem[],
+  includeSolutions: boolean,
+): Promise<void> {
+  const pages: string[] = []
+  for (let i = 0; i < items.length; i++) {
+    const cs = cellSizeForExport(items[i].puzzle.size)
+    pages.push(
+      (
+        await svgToJpegDataUrl(
+          sudokuToSvgMarkup(items[i].puzzle, {
+            showSolution: false,
+            cellSize: cs,
+          }),
+          2,
+        )
+      ).dataUrl,
+    )
+    if (includeSolutions) {
+      pages.push(
+        (
+          await svgToJpegDataUrl(
+            sudokuToSvgMarkup(items[i].puzzle, {
+              showSolution: true,
+              cellSize: cs,
+            }),
+            2,
+          )
+        ).dataUrl,
+      )
+    }
+  }
+  await printJpegPages(pages)
 }

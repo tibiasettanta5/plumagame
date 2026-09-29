@@ -15,6 +15,7 @@ import {
 import './AffiliateKit.css'
 
 export type DownloadPhase = 'generating' | 'ready' | 'error'
+export type DeliveryMode = 'download' | 'print'
 
 const GENERATING_KEY: Record<PopupGame, string> = {
   maze: 'aff.gen.maze',
@@ -88,6 +89,7 @@ type AffiliatePopupProps = {
   onClose: () => void
   /** Quale gioco sta generando — testo e prodotti del popup */
   game?: PopupGame
+  delivery?: DeliveryMode
 }
 
 export function AffiliatePopup({
@@ -96,6 +98,7 @@ export function AffiliatePopup({
   progress,
   onClose,
   game = 'maze',
+  delivery = 'download',
 }: AffiliatePopupProps) {
   const t = useT()
   const products = getPopupProducts(game)
@@ -118,6 +121,16 @@ export function AffiliatePopup({
   if (!open) return null
 
   const showProducts = AFFILIATE_ENABLED && products.length > 0
+  const statusText =
+    phase === 'generating'
+      ? delivery === 'print'
+        ? t('aff.print.preparing')
+        : t(GENERATING_KEY[game])
+      : phase === 'ready'
+        ? delivery === 'print'
+          ? t('aff.print.ready')
+          : t('aff.ready')
+        : t('aff.error')
 
   // Portal su body: evita che il grid del wizard (2 colonne) schiacci/nasconda i prodotti
   return createPortal(
@@ -137,9 +150,7 @@ export function AffiliatePopup({
       >
         <div className="aff-panel-top">
           <h2 id="aff-panel-title" className="aff-panel-status">
-            {phase === 'generating' && t(GENERATING_KEY[game])}
-            {phase === 'ready' && t('aff.ready')}
-            {phase === 'error' && t('aff.error')}
+            {statusText}
           </h2>
           <div className="aff-meter" aria-live="polite">
             <div className="aff-meter-bar">

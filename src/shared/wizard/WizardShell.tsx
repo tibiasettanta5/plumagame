@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { useT } from '../../i18n'
 import { AffiliateFooter, AffiliatePopup, type DownloadPhase } from '../affiliate'
+import type { DeliveryMode } from './commonSteps'
 import type { PopupGame } from '../affiliate/popupProducts.config'
 import { BrandLogo } from '../BrandLogo'
 import '../guide/guide.css'
@@ -19,6 +20,7 @@ type Props = {
   downloadProgress: number
   onCloseAffiliate: () => void
   game: PopupGame
+  delivery?: DeliveryMode
 }
 
 export function WizardShell({
@@ -34,6 +36,7 @@ export function WizardShell({
   downloadProgress,
   onCloseAffiliate,
   game,
+  delivery = 'download',
 }: Props) {
   const t = useT()
   const progressLabel = `${stepIndex + 1} / ${stepTotal}`
@@ -87,6 +90,7 @@ export function WizardShell({
         phase={downloadPhase}
         progress={downloadProgress}
         game={game}
+        delivery={delivery}
         onClose={onCloseAffiliate}
       />
     </>

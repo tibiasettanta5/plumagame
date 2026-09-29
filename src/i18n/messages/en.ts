@@ -12,7 +12,7 @@ export const en: Dict = {
   'common.startCreating': 'Start creating',
   'common.backHome': '← All games',
   'common.ready': 'All set',
-  'common.checkDownload': 'Check your choices and download.',
+  'common.checkDownload': 'Check your choices, then download or print.',
   'common.solutions': 'Solutions',
   'common.format': 'Format',
   'common.quantity': 'Quantity',
@@ -24,6 +24,10 @@ export const en: Dict = {
   'common.downloadedWithSolutions':
     'Downloaded: {n} + solutions ({format}).',
   'common.downloadN': 'Download {n}',
+  'common.printN': 'Print {n}',
+  'common.preparingPrint': 'Preparing print…',
+  'common.printed': 'Print dialog opened.',
+  'common.errorPrint': 'Print error. Please try again.',
   'common.guide': 'Guide · {game}',
   'common.comeSiGioca': 'How to play',
 
@@ -115,6 +119,8 @@ export const en: Dict = {
   'aff.disclosure':
     'As an Amazon Associate I earn from qualifying purchases.',
   'aff.ready': 'Your files are ready',
+  'aff.print.preparing': 'Print in preparation',
+  'aff.print.ready': 'Ready to print',
   'aff.error': 'Something went wrong',
   'aff.gen.maze': 'Generating your mazes',
   'aff.gen.sudoku': 'Generating your sudoku',

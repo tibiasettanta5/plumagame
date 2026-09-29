@@ -113,3 +113,86 @@ export async function exportSvgPuzzlesAsPdf(opts: {
   }
   pdf.save(fileName)
 }
+
+/** Apre la finestra di stampa del browser con una pagina per ogni immagine JPEG. */
+export function printJpegPages(dataUrls: string[]): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const win = window.open('', '_blank')
+    if (!win) {
+      reject(new Error('Finestra di stampa bloccata dal browser'))
+      return
+    }
+    const pages = dataUrls
+      .map(
+        (src) =>
+          `<div class="sheet"><img src="${src}" alt="" /></div>`,
+      )
+      .join('')
+    win.document.write(`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Plumagame</title>
+  <style>
+    @page { size: A4; margin: 10mm; }
+    html, body { margin: 0; padding: 0; background: #fff; }
+    .sheet {
+      page-break-after: always;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    .sheet:last-child { page-break-after: auto; }
+    img {
+      max-width: 100%;
+      max-height: 100vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>${pages}</body>
+</html>`)
+    win.document.close()
+
+    const images = Array.from(win.document.images)
+    const wait = images.map(
+      (img) =>
+        new Promise<void>((done) => {
+          if (img.complete) {
+            done()
+            return
+          }
+          img.onload = () => done()
+          img.onerror = () => done()
+        }),
+    )
+
+    void Promise.all(wait).then(() => {
+      win.focus()
+      win.print()
+      resolve()
+    })
+  })
+}
+
+export async function printSvgPuzzles(opts: {
+  items: unknown[]
+  includeSolutions: boolean
+  toSvg: (item: unknown, showSolution: boolean) => string
+}): Promise<void> {
+  const { items, includeSolutions, toSvg } = opts
+  const pages: string[] = []
+  for (let i = 0; i < items.length; i++) {
+    const puzzle = await svgToJpegDataUrl(toSvg(items[i], false), 2)
+    pages.push(puzzle.dataUrl)
+    if (includeSolutions) {
+      const sol = await svgToJpegDataUrl(toSvg(items[i], true), 2)
+      pages.push(sol.dataUrl)
+    }
+  }
+  await printJpegPages(pages)
+}

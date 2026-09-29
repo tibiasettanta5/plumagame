@@ -21,4 +21,5 @@ export {
   AffiliatePopup,
   getPopupProducts,
   type DownloadPhase,
+  type DeliveryMode,
 } from './AffiliateKit'
